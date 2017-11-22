@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<layers>
+  <layer
+    name="base5.portlets"
+    interface="base5.portlets.interfaces.IBase5PortletsLayer"
+  />
+</layers>
