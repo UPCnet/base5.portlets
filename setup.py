@@ -31,10 +31,14 @@ setup(name='base5.portlets',
       zip_safe=False,
       install_requires=[
           'setuptools',
+          'Products.CMFPlone>=4.0b1'
+
       ],
-      extras_require={'test': ['plone.app.testing',
-                               'plone.app.testing[robot]>=4.2.2',
-                               'plone.app.robotframework[debug]',]},
+      extras_require=dict(
+        test=[
+            'Products.PloneTestCase',
+        ]
+      ),
       entry_points="""
       # -*- Entry points: -*-
       [z3c.autoinclude.plugin]

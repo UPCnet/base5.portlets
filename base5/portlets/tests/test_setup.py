@@ -1,30 +1,95 @@
-# -*- coding: utf-8 -*-
-"""Setup/installation tests for this package."""
-
-from base5.portlets.testing import IntegrationTestCase
-from plone import api
+import unittest
+from base5.portlets.tests.base import ContentWellPortletsTestCase
 
 
-class TestInstall(IntegrationTestCase):
-    """Test installation of base5.portlets into Plone."""
+class TestSetup(ContentWellPortletsTestCase):
+    """Check whether product is installed correctly
+    """
 
-    def setUp(self):
-        """Custom shared utility setup for tests."""
-        self.portal = self.layer['portal']
-        self.installer = api.portal.get_tool('portal_quickinstaller')
+    def afterSetUp(self):
+        pass
 
-    def test_product_installed(self):
-        """Test if base5.portlets is installed with portal_quickinstaller."""
-        self.assertTrue(self.installer.isProductInstalled('base5.portlets'))
+    def testCSSregistered(self):
+        """Is our stylesheet registered?
+        """
+        self.failUnless(
+            '++resource++ContentWellPortlets.styles/ContentWellPortlets.css'
+            in self.portal.portal_css.getResourceIds(),
+            'Cannot find CSS')
 
-    def test_uninstall(self):
-        """Test if base5.portlets is cleanly uninstalled."""
-        self.installer.uninstallProducts(['base5.portlets'])
-        self.assertFalse(self.installer.isProductInstalled('base5.portlets'))
-
-    # browserlayer.xml
-    def test_browserlayer(self):
-        """Test that IBase5PortletsLayer is registered."""
-        from base5.portlets.interfaces import IBase5PortletsLayer
+    def testInterfaceAvailable(self):
+        """Is our product-specific interface available?
+        """
         from plone.browserlayer import utils
-        self.failUnless(IBase5PortletsLayer in utils.registered_layers())
+        from base5.portlets.browser.interfaces\
+            import IContentWellPortlets
+        self.failUnless(
+            IContentWellPortlets in utils.registered_layers(),
+            'Cannot find IContentWellPortlets interface')
+
+    def testPortletManagers(self):
+        """Are our portlet managers available? Test by inserting a calendar
+        portlet
+        """
+        from zope.component import getUtility, getMultiAdapter
+        from plone.app.portlets.portlets import calendar
+        from plone.portlets.interfaces import IPortletManager
+        from plone.portlets.interfaces import IPortletRenderer
+
+        # get the portlet managers we should have created
+        managerAbove = getUtility(
+            IPortletManager,
+            name='ContentWellPortlets.AbovePortletManager1',
+            context=self.portal)
+        managerBelow = getUtility(
+            IPortletManager,
+            name='ContentWellPortlets.BelowPortletManager1',
+            context=self.portal)
+        managerFooter = getUtility(
+            IPortletManager,
+            name='ContentWellPortlets.FooterPortletManager1',
+            context=self.portal)
+
+        # try rendering a portlet with it using
+        # getMultiAdapter((context, request, view, manager, assignment),
+        #                 Interface)
+        renderer = getMultiAdapter(
+            (
+                self.folder,
+                self.folder.REQUEST,
+                self.folder.restrictedTraverse('@@plone'),
+                managerAbove,
+                calendar.Assignment()),
+            IPortletRenderer)
+        self.failUnless(
+            isinstance(renderer, calendar.Renderer),
+            'Cannot render portlet above contents')
+
+        renderer = getMultiAdapter(
+            (
+                self.folder,
+                self.folder.REQUEST,
+                self.folder.restrictedTraverse('@@plone'),
+                managerBelow, calendar.Assignment()),
+            IPortletRenderer)
+        self.failUnless(
+            isinstance(renderer, calendar.Renderer),
+            'Cannot render portlet below contents')
+
+        renderer = getMultiAdapter(
+            (
+                self.folder,
+                self.folder.REQUEST,
+                self.folder.restrictedTraverse('@@plone'),
+                managerFooter,
+                calendar.Assignment()),
+            IPortletRenderer)
+        self.failUnless(
+            isinstance(renderer, calendar.Renderer),
+            'Cannot render footer portlet contents')
+
+
+def test_suite():
+    suite = unittest.TestSuite()
+    suite.addTest(unittest.makeSuite(TestSetup))
+    return suite

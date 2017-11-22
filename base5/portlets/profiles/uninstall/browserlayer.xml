@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layers>
-  <layer
+  <layer remove="True"
     name="base5.portlets"
     interface="base5.portlets.browser.interfaces.IContentWellPortlets"
   />

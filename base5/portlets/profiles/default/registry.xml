@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<registry>
+  <records prefix="plone.bundles/manage-portlets" interface='Products.CMFPlone.interfaces.IBundleRegistry'>
+	  <value key="resources"> </value>
+	  <value key="enabled">True</value>
+	  <value key="jscompilation">++theme++wellportlets/my-manage-portlets.js</value>
+	  <value key="last_compilation">2017-11-21 00:00:00</value>
+	</records>
+</registry>

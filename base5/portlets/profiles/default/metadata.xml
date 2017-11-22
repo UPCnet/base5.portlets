@@ -1,4 +1,5 @@
 <?xml version="1.0"?>
 <metadata>
-  <version>1</version>
+  <description>Enables the addition of portlets to the central column in a page.</description>
+  <version>5</version>
 </metadata>
