@@ -32,7 +32,6 @@ setup(name='base5.portlets',
       install_requires=[
           'setuptools',
           'Products.CMFPlone>=4.0b1'
-
       ],
       extras_require=dict(
         test=[
