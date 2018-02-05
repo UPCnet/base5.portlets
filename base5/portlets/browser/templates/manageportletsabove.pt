@@ -19,8 +19,7 @@
       </div>
       <div metal:fill-slot="main">
          <dl class="portalMessage info"
-            tal:condition="plone_view/isDefaultPageInFolder"
-            i18n:domain="plone">
+            tal:condition="plone_view/isDefaultPageInFolder">
             <dt i18n:translate="">
                Info
             </dt>
