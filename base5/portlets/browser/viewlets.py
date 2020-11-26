@@ -1,5 +1,5 @@
-from Products.CMFCore.utils import getToolByName
 from base5.portlets import messageFactory as _
+from plone import api
 from plone.app.controlpanel.interfaces import IPloneControlPanelView
 from plone.app.layout.viewlets.common import ViewletBase
 from plone.app.portlets.browser import interfaces as pap_interfaces
@@ -43,7 +43,7 @@ class ContentWellPortletsViewlet(ViewletBase):
 
         # This is the way it's done in plone.app.portlets.manager, so we'll do
         # the same
-        mt = getToolByName(self.context, 'portal_membership')
+        mt = api.portal.get_tool(name='portal_membership')
         self.canManagePortlets = not self.dont_show_links and mt.checkPermission(
             'Portlets: Manage portlets', self.context)
 
