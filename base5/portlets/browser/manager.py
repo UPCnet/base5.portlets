@@ -8,7 +8,7 @@ from zope.component import adapts, getUtility, getMultiAdapter
 from plone.app.portlets.browser.manage import ManageContextualPortlets
 from plone.portlets.interfaces import IPortletManager
 from zope.annotation.interfaces import IAnnotations, IAttributeAnnotatable
-from zope.interface import Interface, implements
+from zope.interface import Interface, implementer
 from Products.Five.browser import BrowserView
 from Acquisition import aq_inner
 from zope import schema
@@ -41,9 +41,9 @@ class IColStorage(IAttributeAnnotatable):
     """Marker persistent used to store col number for portlet managers"""
     col = schema.TextLine(title=u"Number of cols for this portletManager.")
 
+@implementer(IColStorage)
 class ColStorage(object):
     """Multiadapter that adapts any context and IPortletManager to provide IColStorage"""
-    implements(IColStorage)
     adapts(Interface, IPortletManager)
 
     def __init__(self, context, manager):

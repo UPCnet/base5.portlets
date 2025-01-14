@@ -1,4 +1,4 @@
-from zope.interface import Interface, implements
+from zope.interface import Interface
 from plone.portlets.interfaces import IPortletManager
 from plone.app.portlets.interfaces import IColumn
 
