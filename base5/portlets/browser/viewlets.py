@@ -10,6 +10,7 @@ from zope.component import getMultiAdapter
 from zope.component import ComponentLookupError
 from zope.component import getUtility
 from base5.portlets.browser.manager import IColStorage
+from six.moves import range
 
 
 class ContentWellPortletsViewlet(ViewletBase):
