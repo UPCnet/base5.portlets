@@ -12,7 +12,7 @@ class TestSetup(ContentWellPortletsTestCase):
     def testCSSregistered(self):
         """Is our stylesheet registered?
         """
-        self.failUnless(
+        self.assertTrue(
             '++resource++ContentWellPortlets.styles/ContentWellPortlets.css'
             in self.portal.portal_css.getResourceIds(),
             'Cannot find CSS')
@@ -23,7 +23,7 @@ class TestSetup(ContentWellPortletsTestCase):
         from plone.browserlayer import utils
         from base5.portlets.browser.interfaces\
             import IContentWellPortlets
-        self.failUnless(
+        self.assertTrue(
             IContentWellPortlets in utils.registered_layers(),
             'Cannot find IContentWellPortlets interface')
 
@@ -61,7 +61,7 @@ class TestSetup(ContentWellPortletsTestCase):
                 managerAbove,
                 calendar.Assignment()),
             IPortletRenderer)
-        self.failUnless(
+        self.assertTrue(
             isinstance(renderer, calendar.Renderer),
             'Cannot render portlet above contents')
 
@@ -72,7 +72,7 @@ class TestSetup(ContentWellPortletsTestCase):
                 self.folder.restrictedTraverse('@@plone'),
                 managerBelow, calendar.Assignment()),
             IPortletRenderer)
-        self.failUnless(
+        self.assertTrue(
             isinstance(renderer, calendar.Renderer),
             'Cannot render portlet below contents')
 
@@ -84,7 +84,7 @@ class TestSetup(ContentWellPortletsTestCase):
                 managerFooter,
                 calendar.Assignment()),
             IPortletRenderer)
-        self.failUnless(
+        self.assertTrue(
             isinstance(renderer, calendar.Renderer),
             'Cannot render footer portlet contents')
 

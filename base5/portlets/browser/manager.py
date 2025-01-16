@@ -39,7 +39,7 @@ class MyManageContextualPortlets(ManageContextualPortlets):
 
 class IColStorage(IAttributeAnnotatable):
     """Marker persistent used to store col number for portlet managers"""
-    col = schema.TextLine(title=u"Number of cols for this portletManager.")
+    col = schema.TextLine(title="Number of cols for this portletManager.")
 
 @implementer(IColStorage)
 class ColStorage(object):

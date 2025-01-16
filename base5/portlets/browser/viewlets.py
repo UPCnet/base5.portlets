@@ -31,7 +31,7 @@ class ContentWellPortletsViewlet(ViewletBase):
         context_state = getMultiAdapter(
             (self.context,
              self.request),
-            name=u'plone_context_state')
+            name='plone_context_state')
 
         if pap_interfaces.IManageContentTypePortletsView.providedBy(self.view):
             key = self.request.form.get('key')
@@ -114,7 +114,7 @@ class PortletsBelowTitleViewlet(ContentWellPortletsViewlet):
     def manage_portlets_link_text(self):
         return _(
             'manage_portlets_below_title_link',
-            default=u'Add, edit or remove a portlet below the content title')
+            default='Add, edit or remove a portlet below the content title')
 
 
 class PortletsAboveViewlet(ContentWellPortletsViewlet):
@@ -128,7 +128,7 @@ class PortletsAboveViewlet(ContentWellPortletsViewlet):
     def manage_portlets_link_text(self):
         return _(
             'manage_portlets_above_link',
-            default=u'Add, edit or remove a portlet above the content')
+            default='Add, edit or remove a portlet above the content')
 
 
 class PortletsBelowViewlet(ContentWellPortletsViewlet):
@@ -142,4 +142,4 @@ class PortletsBelowViewlet(ContentWellPortletsViewlet):
     def manage_portlets_link_text(self):
         return _(
             'manage_portlets_below_link',
-            default=u'Add, edit or remove a portlet below the content')
+            default='Add, edit or remove a portlet below the content')
