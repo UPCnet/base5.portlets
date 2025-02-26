@@ -1,19 +1,17 @@
 from base5.portlets import messageFactory as _
+from base5.portlets.browser.manager import IColStorage
 from plone import api
 from plone.app.controlpanel.interfaces import IPloneControlPanelView
 from plone.app.layout.viewlets.common import ViewletBase
 from plone.app.portlets.browser import interfaces as pap_interfaces
 from plone.app.portlets.browser.interfaces import IManagePortletsView
-from plone.portlets.interfaces import IPortletManager
-from plone.portlets.interfaces import IPortletRetriever
-from zope.component import getMultiAdapter
-from zope.component import ComponentLookupError
-from zope.component import getUtility
-from base5.portlets.browser.manager import IColStorage
+from plone.portlets.interfaces import IPortletManager, IPortletRetriever
 from six.moves import range
+from ulearn5.core.browser.viewlets import viewletBase
+from zope.component import ComponentLookupError, getMultiAdapter, getUtility
 
 
-class ContentWellPortletsViewlet(ViewletBase):
+class ContentWellPortletsViewlet(viewletBase):
     name = ""
     manage_view = ""
 
